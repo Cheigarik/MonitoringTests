@@ -1,3 +1,506 @@
 {
-  "swagger" : "2.0"
+  "swagger" : "2.0",
+  "info" : {
+    "title" : "PZMonitoringAPI",
+    "description" : "API ПЗ \"Мониторинг\" из состава КПС \"Центр Интеграции Бизнес-процессов\"",
+    "version" : "1"
+  },
+  "paths" : {
+    "/api/tech/DownloadedMessages" : {
+      "get" : {
+        "tags" : [ "DownloadedMessages" ],
+        "summary" : "Список cообщений, выгруженных из очереди",
+        "operationId" : "DownloadedMessages",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "comingDateTimeMin",
+          "in" : "query",
+          "description" : "Опционально - минимальная граница периода",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        }, {
+          "name" : "comingDateTimeMax",
+          "in" : "query",
+          "description" : "Опционально - минимальная граница периода",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        }, {
+          "name" : "messageCode",
+          "in" : "query",
+          "description" : "Опционально - код сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "envelopeId",
+          "in" : "query",
+          "description" : "Опционально - идентификатор (GUID) конверта сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "outcomingSystem",
+          "in" : "query",
+          "description" : "Опционально - Наименование системы отправителя",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "messageType",
+          "in" : "query",
+          "description" : "Опционально - тип сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "needResponse",
+          "in" : "query",
+          "description" : "Опционально - признак необходимости ответа",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "haveError",
+          "in" : "query",
+          "description" : "Опционально - признак наличия ошибки",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNum",
+          "in" : "query",
+          "description" : "Обязательно - номер страницы",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "Обязательно - количество элементов на странице",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/InMessagesList"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/ErrorMessages" : {
+      "get" : {
+        "tags" : [ "ErrorMessages" ],
+        "summary" : "Список ошибочных cообщений, выгруженных из очереди",
+        "operationId" : "ErrorMessages",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "comingDateTimeMin",
+          "in" : "query",
+          "description" : "Опционально - минимальная граница периода",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        }, {
+          "name" : "comingDateTimeMax",
+          "in" : "query",
+          "description" : "Опционально - минимальная граница периода",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        }, {
+          "name" : "messageCode",
+          "in" : "query",
+          "description" : "Опционально - код сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "envelopeId",
+          "in" : "query",
+          "description" : "Опционально - идентификатор (GUID) конверта сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "outcomingSystem",
+          "in" : "query",
+          "description" : "Опционально - Наименование системы отправителя",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "messageType",
+          "in" : "query",
+          "description" : "Опционально - тип сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "needResponse",
+          "in" : "query",
+          "description" : "Опционально - признак необходимости ответа",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNum",
+          "in" : "query",
+          "description" : "Обязательно - номер страницы",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "Обязательно - количество элементов на странице",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/InMessagesList"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/InQueue" : {
+      "get" : {
+        "tags" : [ "InQueue" ],
+        "summary" : "Состояние входящей очереди",
+        "operationId" : "InQueue",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/InQueue"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/IncomingMessages" : {
+      "get" : {
+        "tags" : [ "InMessages" ],
+        "summary" : "Список входящих сообщения",
+        "operationId" : "InMessages",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "comingDateTimeMin",
+          "in" : "query",
+          "description" : "Опционально - минимальная граница периода",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        }, {
+          "name" : "comingDateTimeMax",
+          "in" : "query",
+          "description" : "Опционально - минимальная граница периода",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        }, {
+          "name" : "messageCode",
+          "in" : "query",
+          "description" : "Опционально - код сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "envelopeId",
+          "in" : "query",
+          "description" : "Опционально - идентификатор (GUID) конверта сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "outcomingSystem",
+          "in" : "query",
+          "description" : "Опционально - Наименование системы отправителя",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "messageType",
+          "in" : "query",
+          "description" : "Опционально - тип сообщения",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "needResponse",
+          "in" : "query",
+          "description" : "Опционально - признак необходимости ответа",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "haveError",
+          "in" : "query",
+          "description" : "Опционально - признак наличия ошибки",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "pageNum",
+          "in" : "query",
+          "description" : "Обязательно - номер страницы",
+          "required" : false,
+          "type" : "integer"
+        }, {
+          "name" : "pageSize",
+          "in" : "query",
+          "description" : "Обязательно - количество элементов на странице",
+          "required" : false,
+          "type" : "integer"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/InMessagesList"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/ErrorsQueue" : {
+      "get" : {
+        "tags" : [ "ErrorQueue" ],
+        "summary" : "Количество ошибок в очереди (для диаграммы)",
+        "operationId" : "ErrorQueue",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "timePeriod",
+          "in" : "query",
+          "description" : "Период времени: 1 - 5 минут; 2 - 30 минут; 3 - 1 час; 4 - 1 день",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/TimeValue"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/QueueDepth" : {
+      "get" : {
+        "tags" : [ "QueueDepth" ],
+        "summary" : "Количество сообщений в очереди (для диаграммы)",
+        "operationId" : "QueueDepth",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "timePeriod",
+          "in" : "query",
+          "description" : "Период времени: 1 - 5 минут; 2 - 30 минут; 3 - 1 час; 4 - 1 день",
+          "required" : false,
+          "type" : "string",
+          "format" : "date-time"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/TimeValue"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    }
+  },
+  "definitions" : {
+    "TimeValue" : {
+      "description" : "Кортеж значения время - значение",
+      "type" : "object",
+      "properties" : {
+        "Time" : {
+          "description" : "время",
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "Value" : {
+          "description" : "Значение",
+          "type" : "integer"
+        }
+      },
+      "example" : {
+        "time" : "2019-07-03T12:15:20.436Z",
+        "value" : 20
+      }
+    },
+    "InQueue" : {
+      "description" : "Входящая очередь",
+      "type" : "object",
+      "properties" : {
+        "queueName" : {
+          "description" : "Имя очереди",
+          "type" : "string"
+        },
+        "queueState" : {
+          "description" : "Состояние очереди",
+          "type" : "boolean"
+        },
+        "queueDepth" : {
+          "description" : "Губина очереди",
+          "type" : "integer"
+        }
+      },
+      "example" : {
+        "queueName" : "RU.FTS.GNIVC/PPINCOME",
+        "queueState" : true,
+        "queueDepth" : 1200
+      }
+    },
+    "InMessage" : {
+      "description" : "Входящее сообщение",
+      "type" : "object",
+      "properties" : {
+        "comingDateTime" : {
+          "description" : "Время поступления сообщения",
+          "format" : "date-time",
+          "type" : "string"
+        },
+        "messageCode" : {
+          "description" : "Код сообщения",
+          "type" : "string"
+        },
+        "envelopeID" : {
+          "description" : "Идентификатор конверта сообщения",
+          "type" : "string"
+        },
+        "outcomingSystem" : {
+          "description" : "Система-источник входящего сообщения",
+          "type" : "string"
+        },
+        "messageType" : {
+          "description" : "Тип сообщения",
+          "type" : "string"
+        },
+        "needResponse" : {
+          "description" : "Признак ожидания ответного сообщения",
+          "type" : "string"
+        },
+        "haveError" : {
+          "description" : "Признак наличия ошибки при обработке сообщения",
+          "type" : "boolean"
+        }
+      },
+      "example" : {
+        "comingDateTime" : "2019-07-03T12:15:20.436Z",
+        "messageCode" : "MSG.12100",
+        "envelopeID" : "17f14950-d0d1-41d7-898c-442acb12461c",
+        "outcomingSystem" : "АПС ЭПС",
+        "messageType" : "Пакет документов на прибывающий поезд",
+        "needResponse" : "Не требуется",
+        "haveError" : false
+      }
+    },
+    "InMessagesList" : {
+      "description" : "Список входящих сообщений",
+      "type" : "object",
+      "properties" : {
+        "total" : {
+          "description" : "Количество записей",
+          "type" : "integer"
+        },
+        "Messages" : {
+          "description" : "Массив найденных сообщений",
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/InMessage"
+          }
+        }
+      },
+      "example" : {
+        "total" : 100,
+        "Messages" : [ {
+          "comingDateTime" : "2019-07-03T12:15:20.436Z",
+          "messageCode" : true,
+          "envelopeID" : "17f14950-d0d1-41d7-898c-442acb12461c",
+          "outcomingSystem" : "АПС ЭПС",
+          "messageType" : "Пакет документов на прибывающий поезд",
+          "needResponse" : "Не требуется",
+          "haveError" : false
+        }, {
+          "comingDateTime" : "2019-07-03T12:15:20.436Z",
+          "messageCode" : true,
+          "envelopeID" : "17f14950-d0d1-41d7-898c-442acb12461c",
+          "outcomingSystem" : "АПС ЭПС",
+          "messageType" : "Пакет документов на прибывающий поезд",
+          "needResponse" : "Не требуется",
+          "haveError" : false
+        } ]
+      }
+    }
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/Cheigarik/Monitoring/1",
+  "schemes" : [ "https" ]
 }
