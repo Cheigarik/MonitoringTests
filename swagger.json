@@ -6,6 +6,102 @@
     "version" : "1"
   },
   "paths" : {
+    "/api/tech/MessageNamesList" : {
+      "get" : {
+        "tags" : [ "MessageNamesList" ],
+        "summary" : "Перечень названий сообщений",
+        "operationId" : "MessageNamesList",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              },
+              "example" : [ "ПИ Авто", "Регистрация ФВ", "Корректировка ПТД" ]
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/PartnerSystemsList" : {
+      "get" : {
+        "tags" : [ "PartnerSystemsList" ],
+        "summary" : "Перечень смежных систем",
+        "operationId" : "PartnerSystemsList",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              },
+              "example" : [ "АИСТ М", "АС СУР", "АПС СКВВ" ]
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/MessageTypesList" : {
+      "get" : {
+        "tags" : [ "MessageTypesList" ],
+        "summary" : "Перечень типов сообщений",
+        "operationId" : "MessageTypesList",
+        "consumes" : [ ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "uniqueItems" : false,
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              },
+              "example" : [ "MSG.12001", "CMN.12002", "CMN.12121" ]
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
     "/api/tech/DownloadedMessages" : {
       "get" : {
         "tags" : [ "DownloadedMessages" ],
