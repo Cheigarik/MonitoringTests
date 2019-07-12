@@ -158,6 +158,12 @@
           "in" : "query",
           "description" : "Опционально - признак наличия ошибки",
           "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "ErrorDescription",
+          "in" : "query",
+          "description" : "Опционально - признак наличия ошибки",
+          "required" : false,
           "type" : "string"
         }, {
           "name" : "pageNum",
@@ -240,6 +246,12 @@
           "name" : "needResponse",
           "in" : "query",
           "description" : "Опционально - признак необходимости ответа",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "ErrorDescription",
+          "in" : "query",
+          "description" : "Опционально - описание ошибки",
           "required" : false,
           "type" : "string"
         }, {
@@ -360,6 +372,12 @@
           "name" : "haveError",
           "in" : "query",
           "description" : "Опционально - признак наличия ошибки",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "name" : "ErrorDescription",
+          "in" : "query",
+          "description" : "Опционально - описание ошибки",
           "required" : false,
           "type" : "string"
         }, {
