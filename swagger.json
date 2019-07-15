@@ -6,6 +6,159 @@
     "version" : "1"
   },
   "paths" : {
+    "/api/tech/AnalyzeIncommingQueue" : {
+      "get" : {
+        "tags" : [ "AnalyzeIncommingQueue" ],
+        "summary" : "Анализ скопившихся сообщений",
+        "operationId" : "AnalyzeIncommingQueue",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/DownloadIncomingQueue" : {
+      "get" : {
+        "tags" : [ "DownloadIncomingQueue" ],
+        "summary" : "Выгрузка скопившихся сообщений",
+        "operationId" : "DownloadIncomingQueue",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/AnalyzeErrorQueue" : {
+      "get" : {
+        "tags" : [ "AnalyzeErrorQueue" ],
+        "summary" : "Анализ  ошибочных сообщений",
+        "operationId" : "AnalyzeErrorQueue",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/DownloadErrorQueueSettings" : {
+      "get" : {
+        "tags" : [ "DownloadErrorQueueSettings" ],
+        "summary" : "Настройка выгрузки ошибочных сообщений",
+        "operationId" : "DownloadErrorQueueSettings",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "schema" : {
+              "$ref" : "#/definitions/DownloadErrorQueueSettings"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/DownloadErrorQueueSettingsUpdate" : {
+      "post" : {
+        "summary" : "Передать новые настройки очереди",
+        "operationId" : "DownloadErrorQueueSettingsUpdate",
+        "consumes" : [ "application/json-patch+json", "application/json", "text/json", "application/*+json" ],
+        "produces" : [ ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "DownloadQueueSettings",
+          "description" : "Настроки очереди выгрузки ошибочных сообщений",
+          "schema" : {
+            "$ref" : "#/definitions/DownloadErrorQueueSettings"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/tech/DownloadErrorQueue" : {
+      "get" : {
+        "tags" : [ "DownloadErrorQueue" ],
+        "summary" : "Выгрузка ошибочных сообщений",
+        "operationId" : "DownloadErrorQueue",
+        "consumes" : [ ],
+        "produces" : [ ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Success"
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "example" : {
+                "error" : "Текст ошибки"
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
     "/api/tech/MessageNamesList" : {
       "get" : {
         "tags" : [ "MessageNamesList" ],
@@ -162,7 +315,7 @@
         }, {
           "name" : "ErrorDescription",
           "in" : "query",
-          "description" : "Опционально - признак наличия ошибки",
+          "description" : "Опционально - описание ошибки",
           "required" : false,
           "type" : "string"
         }, {
@@ -611,6 +764,29 @@
           "needResponse" : "Не требуется",
           "haveError" : false
         } ]
+      }
+    },
+    "DownloadErrorQueueSettings" : {
+      "description" : "Настройки выгрузки ошибочной очереди",
+      "type" : "object",
+      "properties" : {
+        "AutomaticDownload" : {
+          "description" : "Автоматическая выгрузка",
+          "type" : "boolean"
+        },
+        "Period" : {
+          "description" : "Период выгрузки (часы)",
+          "type" : "integer"
+        },
+        "DownloadCatalog" : {
+          "description" : "каталог выгрузки",
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "AutomaticDownload" : true,
+        "Period" : "integer",
+        "DownloadCatalog" : "Z:\\Temp\\ErrorQueue"
       }
     }
   },
